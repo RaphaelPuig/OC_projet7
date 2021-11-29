@@ -154,7 +154,7 @@ def update_figure(SK_ID_CURR):
 
     fig = make_subplots(rows=2, cols=3,
                         subplot_titles=('EXT_SOURCE_3', 'EXT_SOURCE_2', 'EXT_SOURCE_1',
-                                        'Age', 'AMT_CREDIT', 'Payback failure probability'))
+                                        'Age (years)', 'AMT_CREDIT (dollars)', 'Payback failure probability'))
 
     # EXT_SOURCE_3
     fig.add_trace(go.Scatter(x=X_ES3, y=Z_ES3_0, marker = {'color' : 'blue'}, showlegend=False), row=1, col=1)
