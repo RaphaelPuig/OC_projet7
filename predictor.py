@@ -98,7 +98,27 @@ def parse_contents(contents, filename):
         dash_table.DataTable(
             data=df_extract.to_dict('records'),
             columns=[{'name': i, 'id': i} for i in df_extract.columns],
+            sort_action='native',
             editable=False,
+            style_data_conditional=[
+                {
+                    'if': {'filter_query': '{PREDICTION} < 0.33'},
+                    'backgroundColor': 'rgb(220, 255, 220)',
+                },
+                {
+                    'if': {'filter_query': '0.33 <= {PREDICTION} < 0.66'},
+                    'backgroundColor': 'rgb(255, 245, 220)',
+                },
+                {
+                    'if': {'filter_query': '{PREDICTION} >= 0.66'},
+                    'backgroundColor': 'rgb(255, 220, 220)',
+                },
+                {
+                    'if': {'state': 'active'},
+                    'backgroundColor': 'rgb(220, 255, 255)',
+                    'border': '1px solid rgb(210, 210, 210)'
+                },
+            ],
         ),
     ])
 
