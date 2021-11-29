@@ -120,11 +120,11 @@ app.layout = html.Div([
         ),
     
     html.Table([
-        html.Tr([html.Td(['EXT_SOURCE_1:']), html.Td(id='ES1'), 
+        html.Tr([html.Td(['EXT_SOURCE_3:']), html.Td(id='ES3'), 
                  html.Td(['EXT_SOURCE_2:']), html.Td(id='ES2'),
-                 html.Td(['EXT_SOURCE_3:']), html.Td(id='ES3'),
-                 html.Td(['AMT_CREDIT:']), html.Td(id='AMT'),
+                 html.Td(['EXT_SOURCE_1:']), html.Td(id='ES1'),
                  html.Td(['Age:']), html.Td(id='Age'),
+                 html.Td(['AMT_CREDIT:']), html.Td(id='AMT'),
                  html.Td(['Payback failure probability:']), html.Td(id='pred')
                  ]),
     ]),
@@ -136,11 +136,11 @@ app.layout = html.Div([
 
 @app.callback(
     Output('graphic','figure'),
-    Output('ES1','children'),
-    Output('ES2','children'),
     Output('ES3','children'),
-    Output('AMT','children'),
+    Output('ES2','children'),
+    Output('ES1','children'),
     Output('Age', 'children'),
+    Output('AMT','children'),
     Output('pred','children'),
     Input('SK_ID_CURR', 'value'))
 def update_figure(SK_ID_CURR):
@@ -153,27 +153,28 @@ def update_figure(SK_ID_CURR):
     pred = np.round(global_df[global_df.SK_ID_CURR == SK_ID_CURR].PREDICTION.item(), decimals=3)
 
     fig = make_subplots(rows=2, cols=3,
-                        subplot_titles=('EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3',
-                                        'AMT_CREDIT', 'Age', 'Payback failure probability'))
-    # EXT_SOURCE_1
-    fig.add_trace(go.Scatter(x=X_ES1, y=Z_ES1_0, marker = {'color' : 'blue'}, name='success'), row=1, col=1)
-    fig.add_trace(go.Scatter(x=X_ES1, y=Z_ES1_1, marker = {'color' : 'red'},  name='failure'), row=1, col=1)
+                        subplot_titles=('EXT_SOURCE_3', 'EXT_SOURCE_2', 'EXT_SOURCE_1',
+                                        'Age', 'AMT_CREDIT', 'Payback failure probability'))
+
+    # EXT_SOURCE_3
+    fig.add_trace(go.Scatter(x=X_ES3, y=Z_ES3_0, marker = {'color' : 'blue'}, showlegend=False), row=1, col=1)
+    fig.add_trace(go.Scatter(x=X_ES3, y=Z_ES3_1, marker = {'color' : 'red'}, showlegend=False), row=1, col=1)
 
     # EXT_SOURCE_2
     fig.add_trace(go.Scatter(x=X_ES2, y=Z_ES2_0, marker = {'color' : 'blue'}, showlegend=False), row=1, col=2)
     fig.add_trace(go.Scatter(x=X_ES2, y=Z_ES2_1, marker = {'color' : 'red'}, showlegend=False), row=1, col=2)
 
-    # EXT_SOURCE_3
-    fig.add_trace(go.Scatter(x=X_ES3, y=Z_ES3_0, marker = {'color' : 'blue'}, showlegend=False), row=1, col=3)
-    fig.add_trace(go.Scatter(x=X_ES3, y=Z_ES3_1, marker = {'color' : 'red'}, showlegend=False), row=1, col=3)
-
-    # AMT_CREDIT
-    fig.add_trace(go.Scatter(x=X_AMT, y=Z_AMT_0, marker = {'color' : 'blue'}, showlegend=False), row=2, col=1)
-    fig.add_trace(go.Scatter(x=X_AMT, y=Z_AMT_1, marker = {'color' : 'red'}, showlegend=False), row=2, col=1)
+    # EXT_SOURCE_1
+    fig.add_trace(go.Scatter(x=X_ES1, y=Z_ES1_0, marker = {'color' : 'blue'}, name='success'), row=1, col=3)
+    fig.add_trace(go.Scatter(x=X_ES1, y=Z_ES1_1, marker = {'color' : 'red'},  name='failure'), row=1, col=3)
 
     # Age
-    fig.add_trace(go.Scatter(x=X_age, y=Z_age_0, marker = {'color' : 'blue'}, showlegend=False), row=2, col=2)
-    fig.add_trace(go.Scatter(x=X_age, y=Z_age_1, marker = {'color' : 'red'}, showlegend=False), row=2, col=2)
+    fig.add_trace(go.Scatter(x=X_age, y=Z_age_0, marker = {'color' : 'blue'}, showlegend=False), row=2, col=1)
+    fig.add_trace(go.Scatter(x=X_age, y=Z_age_1, marker = {'color' : 'red'}, showlegend=False), row=2, col=1)
+
+    # AMT_CREDIT
+    fig.add_trace(go.Scatter(x=X_AMT, y=Z_AMT_0, marker = {'color' : 'blue'}, showlegend=False), row=2, col=2)
+    fig.add_trace(go.Scatter(x=X_AMT, y=Z_AMT_1, marker = {'color' : 'red'}, showlegend=False), row=2, col=2)
 
     # Predictions    
     fig.add_trace(go.Scatter(x=X_pred, y=Z_pred, marker = {'color' : 'purple'}, showlegend=False), row=2, col=3)
@@ -188,8 +189,8 @@ def update_figure(SK_ID_CURR):
     fig.update_layout(title={'text': 'Kernel density estimators of the main features and the payback failure probability'})
 
     # Vertical lines
-    if np.isnan(ES1_value)==False:
-        fig.add_trace(go.Scatter(x=[ES1_value, ES1_value], y=[0,np.max([Z_ES1_0,Z_ES1_1])], mode='lines',
+    if np.isnan(ES3_value)==False:
+        fig.add_trace(go.Scatter(x=[ES3_value, ES3_value], y=[0,np.max([Z_ES3_0,Z_ES3_1])], mode='lines',
                                  line={'color': 'green', 'width': 1, 'dash': 'dot'},
                                  showlegend=False),
                                  row=1, col=1)
@@ -200,21 +201,20 @@ def update_figure(SK_ID_CURR):
                                  showlegend=False),
                                  row=1, col=2)
 
-    if np.isnan(ES3_value)==False:
-        fig.add_trace(go.Scatter(x=[ES3_value, ES3_value], y=[0,np.max([Z_ES3_0,Z_ES3_1])], mode='lines',
+    if np.isnan(ES1_value)==False:
+        fig.add_trace(go.Scatter(x=[ES1_value, ES1_value], y=[0,np.max([Z_ES1_0,Z_ES1_1])], mode='lines',
                                  line={'color': 'green', 'width': 1, 'dash': 'dot'},
                                  showlegend=False),
-                                 row=1, col=3)
-
-    if np.isnan(AMT_value)==False:
-        fig.add_trace(go.Scatter(x=[AMT_value, AMT_value], y=[0,np.max([Z_AMT_0,Z_AMT_1])], mode='lines',
-                                 line={'color': 'green', 'width': 1, 'dash': 'dot'},
-                                 showlegend=False),
-                                 row=2, col=1)
-    
+                                 row=1, col=3)    
 
     if np.isnan(age_value)==False:
         fig.add_trace(go.Scatter(x=[age_value, age_value], y=[0,np.max([Z_age_0,Z_age_1])], mode='lines',
+                                 line={'color': 'green', 'width': 1, 'dash': 'dot'},
+                                 showlegend=False),
+                                 row=2, col=1)
+                                 
+    if np.isnan(AMT_value)==False:
+        fig.add_trace(go.Scatter(x=[AMT_value, AMT_value], y=[0,np.max([Z_AMT_0,Z_AMT_1])], mode='lines',
                                  line={'color': 'green', 'width': 1, 'dash': 'dot'},
                                  showlegend=False),
                                  row=2, col=2)
@@ -227,7 +227,7 @@ def update_figure(SK_ID_CURR):
 
     fig.update_yaxes(title='density')
 
-    return fig, ES1_value, ES2_value, ES3_value, AMT_value, age_value, pred #empl_value, pred
+    return fig, ES3_value, ES2_value, ES1_value, age_value, AMT_value, pred
 
 
 if __name__ == '__main__':
