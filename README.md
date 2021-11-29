@@ -3,8 +3,10 @@
 Seventh project of the OpenClassrooms Data Scientist training course (implement a scoring model).
 
 Running the notebooks requires first downloading the data from the following links:
-1. https://drive.google.com/file/d/1-lvuu6Sdao5BUGuGPjP0VqqAKYzBZxP8/view?usp=sharing (notebooks 1 and 2)
-2. https://drive.google.com/file/d/1Vser4zMHv2EFVfRwADSrm8-pPXaNISSg/view?usp=sharing (notebooks 3 and 4)
+1. https://drive.google.com/file/d/1-lvuu6Sdao5BUGuGPjP0VqqAKYzBZxP8/view?usp=sharing 
+(for notebooks 1 and 2)
+2. https://drive.google.com/file/d/1Vser4zMHv2EFVfRwADSrm8-pPXaNISSg/view?usp=sharing 
+(for notebooks 3 and 4)
 
 Unzip and cut/paste the folders in your directory.
 
