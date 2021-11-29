@@ -70,24 +70,25 @@ def parse_contents(contents, filename):
         pred.append(predictor(loaded_model, loaded_imputer, loaded_scaler, df.iloc[[i]]))
 
     # Selection of main features for final display
-    df_extract = df[['SK_ID_CURR','EXT_SOURCE_1','EXT_SOURCE_2',
-                     'EXT_SOURCE_3','AMT_CREDIT','DAYS_BIRTH']].copy()
+    df_extract = df[['SK_ID_CURR','EXT_SOURCE_3','EXT_SOURCE_2',
+                     'EXT_SOURCE_1','DAYS_BIRTH','AMT_CREDIT']].copy()
                                                          
     # Convert 'DAYS' features in years
     df_extract['DAYS_BIRTH'] = df_extract['DAYS_BIRTH'].div(-365)
 
-    # Rename accordingly
-    df_extract.rename(columns={'DAYS_BIRTH': 'AGE'}, inplace=True)
+    # Rename columns (with units)
+    df_extract.rename(columns={'DAYS_BIRTH': 'AGE (years)'}, inplace=True)
+    df_extract.rename(columns={'AMT_CREDIT': 'AMT_CREDIT (dollars)'}, inplace=True)
 
     # Add the predictions to the dataframe
     df_extract['PREDICTION'] = pred
 
     # Round data to improve readabilty
-    df_extract = df_extract.round({'EXT_SOURCE_1':3, 
+    df_extract = df_extract.round({'EXT_SOURCE_3':3,
                                    'EXT_SOURCE_2':3, 
-                                   'EXT_SOURCE_3':3,
-                                   'AGE':0,
-                                   'AMT_CREDIT':0, 
+                                   'EXT_SOURCE_1':3,
+                                   'AGE (years)':0,
+                                   'AMT_CREDIT (dollars)':0,
                                    'PREDICTION': 3})
 
     return html.Div([
