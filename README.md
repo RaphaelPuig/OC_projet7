@@ -1,15 +1,21 @@
 # OC_projet7
-Projet 7 de la formation DataScientist d'OpenClassrooms (Implémentez un modèle de scoring)
 
-Ce dépôt contient :
-1. les notebooks Jupyter écrits pour mettre en forme les données et construire le modèle prédictif
-2. les données nécessaires à faire tourner les notebooks
-3. une note explicative générale détaillant la démarche suivie
-4. les premières versions des pages de l'application HomeCredit (fichiers dashboard_app et predictor_app)
-5. l'application finale (dossier puigraphael-oc-projet7)
+Seventh project of the OpenClassrooms Data Scientist training course (implement a scoring model).
 
-L'application finale est accessibles depuis l'URL : https://puigraphael-oc-projet7.herokuapp.com/
+Running the notebooks requires first downloading the data from the following links:
+1. https://drive.google.com/file/d/1-lvuu6Sdao5BUGuGPjP0VqqAKYzBZxP8/view?usp=sharing (notebooks 1 and 2)
+2. https://drive.google.com/file/d/1Vser4zMHv2EFVfRwADSrm8-pPXaNISSg/view?usp=sharing (notebooks 3 and 4)
 
-Les échantillons de données pour tester le prédicteur sont disponibles via le dossier app_samples.zip
+Unzip and cut/paste the folders in your directory.
 
-Le téléchargement des dossiers data_1-2.zip et data_3-4.zip suppose l'installation de Git LFS : https://git-lfs.github.com/# OC_projet7
+To locally run the dashboard and predictor apps:
+1. create and activate a virtual environment (e.g. via virtualenv)
+2. install the required libraries: $ pip install -r requirements.txt
+3. run the app: $ python [name_of_app].py
+
+To locally run the final application:
+1. change directory to puigraphael-oc-projet7_dev folder
+2. create a virtual environment and install required libraries (see above)
+3. run the app: $ python index.py
+
+The final application is also deployed at the following URL: https://puigraphael-oc-projet7.herokuapp.com/ 
