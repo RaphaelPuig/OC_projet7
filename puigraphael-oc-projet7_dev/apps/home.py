@@ -17,7 +17,7 @@ layout = html.Div([
     html.H3([
         dcc.Link('Predictor', href='/predictor/'),
         ]),
-    html.H6('Displays the main features and the payback failure probability for the clients in a uploaded database.'),
+    html.H6('Displays the main features and the payback failure probability for the clients from an uploaded database.'),
     html.H6('Suppose a database in csv or xls format to load.'),
     html.Br(),
     html.Br(),
