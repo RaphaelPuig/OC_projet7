@@ -3,8 +3,8 @@
 Seventh project of the OpenClassrooms Data Scientist training course (implement a scoring model).
 
 ### Running the notebooks requires first downloading the data from the following links:
-1. https://drive.google.com/drive/folders/1U1eMg4NN7lzrI4Uuc9EUie0FVcYRt127?usp=sharing (NtBks 1 and 2)
-2. https://drive.google.com/drive/folders/1uMT0Ofrf_cOCqKXLrhU3PI9841IQ6fyU?usp=sharing (NtBks 3 and 4)
+1. https://drive.google.com/file/d/1N6QrqKMByaHJLGNqROcSyO4JWRWFdwsm/view?usp=sharing (NtBks 1 and 2)
+2. https://drive.google.com/file/d/1N6VwFgtqxip1oFAp90KyT-B_tiLOi6Qu/view?usp=sharing (NtBks 3 and 4)
 
 Unzip and cut/paste the folders in your directory.
 
